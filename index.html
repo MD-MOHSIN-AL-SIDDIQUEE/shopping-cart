@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto"> 
+               <!--এখানে প্রথমে cd-md-12 এবং mx-auto মানে medium device মানে 768px এর চেয়ে বড় কিন্তু 992 এর চেয়ে ছোট screen এর জন্য এটা সর্বমোট ১২ ভাগে বিভক্ত করবে।কিন্তু cd-lg-10 এবং mx-auto এর জন্য অর্থাৎ large device এ প্রবেশ করলে এটা ১০ তা নেবে দুইটা খালি রাখবে।
+            -->
+
+               <div class="cart-item">
+                  <div class="row">
+                     <!--এখানে row মানে total 12 ভাগের ভেতরে এর item গুলো row আকারে বসবে।-->
+                     <div class="col-md-7 center-item">
+                      <!--total 12 ভাগের ভিতরে 7 টা medium device এর জন্য  -->  
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                          <!--total 12 ভাগের ভিতরে 5 টা medium device এর জন্য  -->  
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default"><i class="fas fa-minus" id="minus"></i></button>
+                           <input id="Item" type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default"><i class="fas fa-plus"id="plus"></i></button>
+                        </div>
+                        <h5>$<span id="item-1" >1219</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$59</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$1,278</h5>
+                        <h5>$0</h5>
+                        <h5>$1,278</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <section>
+      <script>
+         minusBtn=document.getElementById("minus")
+         minusBtn.addEventListener("click",function(){      
+            minusItemValue= updateItem("Item");//x
+            minusInput=minusItemValue-1;
+            document.getElementById("Item").value=minusInput;
+
+            itemPrice= document.getElementById("item-1").innerText 
+            itemPriceValue=parseFloat(itemPrice)
+            newPriceValue=itemPriceValue-1219;
+            document.getElementById("item-1").innerText= newPriceValue;
+         })
+         plusBtn=document.getElementById("plus")
+         plusBtn.addEventListener("click",function(){
+            plusItemValue=updateItem("Item") 
+            plusInput=plusItemValue+1;
+            document.getElementById("Item").value=plusInput;
+
+            itemPrice= document.getElementById("item-1").innerText 
+            itemPriceValue=parseFloat(itemPrice)
+            newPriceValue=itemPriceValue+1219;
+            document.getElementById("item-1").innerText= newPriceValue;
+
+         })
+
+         function updateItem(id){
+            idInput=document.getElementById(id).value
+            idItemValue= parseFloat(idInput);
+            return idItemValue
+            }//x
+        function updatePriceItem(id){
+        
+        }
+         
+
+       
+      </script>
+   </section>
+</body>
+
+</html>

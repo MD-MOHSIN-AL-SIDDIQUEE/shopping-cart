@@ -11,16 +11,15 @@
 </head>
 
 <body>
-
-   <section>
+         <section>
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto"> 
                <!--এখানে প্রথমে cd-md-12 এবং mx-auto মানে medium device মানে 768px এর চেয়ে বড় কিন্তু 992 এর চেয়ে ছোট screen এর জন্য এটা সর্বমোট ১২ ভাগে বিভক্ত করবে।কিন্তু cd-lg-10 এবং mx-auto এর জন্য অর্থাৎ large device এ প্রবেশ করলে এটা ১০ তা নেবে দুইটা খালি রাখবে।
             -->
-
-               <div class="cart-item">
-                  <div class="row">
+            <form action="" autocomplete="off">     
+               <div class="cart-item" id="item1area">
+                        <div class="row">
                      <!--এখানে row মানে total 12 ভাগের ভেতরে এর item গুলো row আকারে বসবে।-->
                      <div class="col-md-7 center-item">
                       <!--total 12 ভাগের ভিতরে 7 টা medium device এর জন্য  -->  
@@ -31,17 +30,17 @@
                      <div class="col-md-5 center-item">
                           <!--total 12 ভাগের ভিতরে 5 টা medium device এর জন্য  -->  
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus" id="minus"></i></button>
-                           <input id="Item" type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"id="plus"></i></button>
+                           <button type="button"class="btn btn-default"><i class="fas fa-minus" id="minus"></i></button>
+                           <input id="input1" type="text" class="form-control text-center" value="1">
+                           <button type="button"class="btn btn-default"><i class="fas fa-plus"id="plus"></i></button>
                         </div>
-                        <h5>$<span id="item-1" >1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$<span id="item1" >1219</span></h5>
+                        <img src="images/remove.png" alt="" id="remove1" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div class="cart-item" id="item2area">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -49,13 +48,13 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button type="button"class="btn btn-default"><i class="fas fa-minus"id="minus2"></i></button>
+                           <input id="input2" type="text" class="form-control text-center" value="1">
+                           <button type="button"class="btn btn-default"><i class="fas fa-plus"id="plus2"></i></button>
 
                         </div>
-                        <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$<span id="item2">59</span></h5>
+                        <img src="images/remove.png" alt="" id="remove2" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -70,9 +69,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$<span id="subtotal">1278</span></h5>
+                        <h5>$ <span id="tax">0</span></h5>
+                        <h5>$ <span id="total">1,278</span></h5>
                      </div>
                   </div>
                </div>
@@ -86,42 +85,103 @@
    <section>
       <script>
          minusBtn=document.getElementById("minus")
-         minusBtn.addEventListener("click",function(){      
-            minusItemValue= updateItem("Item");//x
-            minusInput=minusItemValue-1;
-            document.getElementById("Item").value=minusInput;
-
-            itemPrice= document.getElementById("item-1").innerText 
-            itemPriceValue=parseFloat(itemPrice)
-            newPriceValue=itemPriceValue-1219;
-            document.getElementById("item-1").innerText= newPriceValue;
+         minusBtn.addEventListener("click",function(){               
+            reduceValueForClick=-1         
+            oneItemValue= -1219;
+            foundPriceValueAndSubtotal=updatePriceValue(oneItemValue, reduceValueForClick,"item1","input1")
+            foundTaxAndTotal=  updatetotal("tax","total","subtotal")
          })
          plusBtn=document.getElementById("plus")
          plusBtn.addEventListener("click",function(){
-            plusItemValue=updateItem("Item") 
-            plusInput=plusItemValue+1;
-            document.getElementById("Item").value=plusInput;
+            reduceValueForClick=1         
+            oneItemValue= 1219;
+            foundPriceValueAndSubtotal=updatePriceValue(oneItemValue, reduceValueForClick,"item1","input1")
+            foundTaxAndTotal=  updatetotal("tax","total","subtotal")
 
-            itemPrice= document.getElementById("item-1").innerText 
-            itemPriceValue=parseFloat(itemPrice)
-            newPriceValue=itemPriceValue+1219;
-            document.getElementById("item-1").innerText= newPriceValue;
+         })
+         removeBtn=document.getElementById("remove1")
+         removeBtn.addEventListener("click",function(){
+         foundRevisedValue= removeItem("item1area","item1");
+         })
+        
+         
+         minus2Btn=document.getElementById("minus2")
+         minus2Btn.addEventListener("click",function(){      
+           
+            reduceValueForClick=-1         
+            oneItemValue= -59;
+            foundPriceValueAndSubtotal=updatePriceValue(oneItemValue, reduceValueForClick,"item2","input2")
+            foundTaxAndTotal=  updatetotal("tax","total","subtotal")
 
          })
 
+         plus2Btn=document.getElementById("plus2")
+         plus2Btn.addEventListener("click",function(){
+            
+            reduceValueForClick=1 ;      
+            oneItemValue= 59;
+            foundPriceValueAndSubtotal=updatePriceValue(oneItemValue, reduceValueForClick,"item2","input2")
+            foundTaxAndTotal=  updatetotal("tax","total","subtotal")
+         })
+         removeBtn=document.getElementById("remove2")
+         removeBtn.addEventListener("click",function(){
+         foundRevisedValue= removeItem("item2area","item2");
+         })
+         function removeItem(id1,id2){
+            item=document.getElementById(id1)
+            item.style.display="none";
+            foundRemovedItemValue=updatePriceItem(id2)
+            foundSubtitleValue=updatePriceItem("subtotal")
+            newSubtitleValue=    foundSubtitleValue-foundRemovedItemValue;
+            document.getElementById("subtotal").innerText=newSubtitleValue;           
+            newTotalValue=  newSubtitleValue 
+            document.getElementById("total").innerText=newTotalValue;
+         }
+
+        
+         function updatePriceValue(oneItemValue, reduceValueForClick,id1,id2){
+            inputValue= updateItem(id2);  //x
+            Input=inputValue+reduceValueForClick;
+            if(Input>=0){
+            document.getElementById(id2).value=Input; 
+            itemPriceValue=updatePriceItem(id1) 
+            newPriceValue=itemPriceValue+ oneItemValue;
+            document.getElementById(id1).innerText= newPriceValue;
+            }
+            }
+
+    
+         function updatetotal(){
+            item1Value=updatePriceItem("item1")
+            item2Value=updatePriceItem("item2")
+            
+           
+           
+            newsubtotalValue= item1Value+   item2Value
+            document.getElementById("subtotal").innerText=newsubtotalValue
+            taxValue=updatePriceItem("tax")
+            document.getElementById("tax").innerText=taxValue
+            totalValue=updatePriceItem("total")
+            newTotalValue=taxValue+ newsubtotalValue
+            document.getElementById("total").innerText=newTotalValue
+            return(taxValue,newTotalValue)
+            }
+         
          function updateItem(id){
-            idInput=document.getElementById(id).value
-            idItemValue= parseFloat(idInput);
-            return idItemValue
+            Input=document.getElementById(id).value
+            inputValue= parseFloat(Input);
+            return inputValue;
             }//x
         function updatePriceItem(id){
-        
+         itemPrice= document.getElementById(id).innerText 
+            itemPriceValue=parseFloat(itemPrice)
+            return itemPriceValue
         }
-         
+      
 
        
       </script>
-   </section>
+   </section>  
 </body>
 
 </html>
